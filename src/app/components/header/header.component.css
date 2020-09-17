@@ -1,0 +1,21 @@
+#header {
+  background: #2764a5;
+  min-height: 50px;
+}
+
+#header .router-link-active {
+  background: #000;
+  border-radius: 4px;
+}
+
+#header nav{
+  background: #2764a5;
+}
+
+#header .nav-link {
+  cursor: pointer;
+}
+
+#header nav li a {
+  color: #fff;
+}

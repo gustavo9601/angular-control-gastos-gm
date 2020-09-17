@@ -1,0 +1,50 @@
+<div class="row" id="header">
+  <div class="col-12">
+
+    <div class="row">
+      <div class="col-12 text-center text-light mt-4 mb-4">
+        <h1>{{'label.name.app' | translate}}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <!-- Menu -->
+
+
+        <nav class="navbar navbar-expand-lg navbar-light">
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mt-lg-0">
+              <li class="nav-item" [routerLink]="['/']" routerLinkActive="$router_link-active$">
+                <a class="nav-link">{{'label.resume' | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">{{'label.add.deposit' | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">{{'label.add.expense' | translate}}</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/categories']" routerLinkActive="$router_link-active$">
+                <a class="nav-link">{{'label.categories' | translate}}</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/']" routerLinkActive="$router_link-active$">
+                <a class="nav-link">{{'label.graphics' | translate}}</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/']" routerLinkActive="$router_link-active$">
+                <a class="nav-link">{{'label.logout' | translate}}</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+
+  </div>
+</div>
