@@ -1,0 +1,30 @@
+<app-detail (close)="closeDetail($event)">
+  <h1 detail-title>{{'label.add.category' | translate}}</h1>
+
+  <form detail-content [formGroup]="formCategory" (ngSubmit)="addCategory()">
+    <div class="row form-group">
+      <div class="col-12">
+        <label for="name">{{'label.name' | translate}}</label>
+        <input type="text" name="name" formControlName="name" class="form-control" id="name"
+               [ngClass]="{'is-valid': name.dirty && name.valid, 'is-invalid': name.dirty && name.invalid}"
+        >
+        <div class="valid-feedback">
+          <span>{{'label.correct' | translate}}</span>
+        </div>
+        <div class="invalid-feedback">
+          <span *ngIf="name.errors?.required">{{'label.required' | translate}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <button
+          [disabled]="formCategory.invalid"
+          type="submit"
+          class="btn btn-primary btn-block">{{'label.add.category' | translate}}</button>
+      </div>
+    </div>
+  </form>
+
+</app-detail>

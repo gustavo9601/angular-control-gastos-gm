@@ -6,6 +6,7 @@ import {CommonModule} from '@angular/common';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import { DetailComponent } from './components/detail/detail.component';
 
+
 @NgModule({
   declarations: [
     SpinnerComponent,

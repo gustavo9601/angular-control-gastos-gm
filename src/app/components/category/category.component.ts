@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-category',
@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryComponent implements OnInit {
 
-  constructor() { }
+  public showDetail: boolean;
+
+  constructor() {
+    this.showDetail = false;
+
+  }
 
   ngOnInit() {
   }
 
+  closeDetail($event) {
+    console.log('closeDetail event');
+    this.showDetail = $event;
+  }
+
+  openDetail() {
+    this.showDetail = true;
+  }
 }

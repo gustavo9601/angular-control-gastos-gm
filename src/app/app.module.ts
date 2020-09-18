@@ -5,6 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // Pipes
 import { TranslatePipe } from './pipes/translate.pipe';
@@ -18,6 +21,23 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import {SharedModule} from './shared/shared.module';
 import { CategoryComponent } from './components/category/category.component';
+import { AddCategoryComponent } from './components/category/add-category/add-category.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+// Firebase
+// import {AngularFireModule} from '@'
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBtxZ2ikksvG3BYsIOOzrcwy0GVXwuDGTY",
+  authDomain: "gm-control-gastos.firebaseapp.com",
+  databaseURL: "https://gm-control-gastos.firebaseio.com",
+  projectId: "gm-control-gastos",
+  storageBucket: "gm-control-gastos.appspot.com",
+  messagingSenderId: "296944224842",
+  appId: "1:296944224842:web:d22f9fc130d40fcd9474b3"
+};
+
 
 
 export function translateFactory(provider: TranslateService) {
@@ -33,13 +53,20 @@ export function configFactory(provider: ConfigService) {
     AppComponent,
     TranslatePipe,
     HeaderComponent,
-    CategoryComponent
+    CategoryComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     TranslateService,

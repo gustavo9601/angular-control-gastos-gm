@@ -24,3 +24,17 @@
   background-color: hsla(0, 0%, 100%, .6);
   cursor: default;
 }
+
+/* desde 992px en adelante */
+@media(min-width: 992px){
+  #detail{
+    width: 40%;
+  }
+}
+
+/* atras hasta 992px  */
+@media(max-width: 992px){
+  #detail{
+    width: 100%;
+  }
+}
