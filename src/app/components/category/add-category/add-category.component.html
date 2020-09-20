@@ -1,5 +1,5 @@
 <app-detail (close)="closeDetail($event)">
-  <h1 detail-title>{{'label.add.category' | translate}}</h1>
+  <h1 detail-title>{{ (categoryEdit) ? ('label.edit.category' | translate) : ('label.add.category' | translate)}}</h1>
 
   <form detail-content [formGroup]="formCategory" (ngSubmit)="addCategory()">
     <div class="row form-group">
@@ -13,6 +13,7 @@
         </div>
         <div class="invalid-feedback">
           <span *ngIf="name.errors?.required">{{'label.required' | translate}}</span>
+          <span *ngIf="name.errors?.existsCategory">{{'label.exists.category' | translate}}</span>
         </div>
       </div>
     </div>
@@ -22,9 +23,38 @@
         <button
           [disabled]="formCategory.invalid"
           type="submit"
-          class="btn btn-primary btn-block">{{'label.add.category' | translate}}</button>
+          class="btn btn-primary btn-block">{{(categoryEdit) ? ('label.edit.category' | translate) :'label.add.category' | translate}}</button>
       </div>
     </div>
   </form>
 
 </app-detail>
+
+
+<ng-template #modal_success let-modal>
+
+
+  <div class="modal-header">
+    <h5 class="modal-title">{{'label.success' | translate}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{(categoryEdit) ? ('label.edit.category.success' | translate) : ('label.add.category.success' | translate)}}
+  </div>
+
+</ng-template>
+
+
+<ng-template #modal_error let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ (categoryEdit) ? ('label.edit.category.error' | translate) : ('label.add.category.error' | translate)}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{(categoryEdit) ? ('label.edit.category.error' | translate):'label.add.category.error' | translate}}
+  </div>
+</ng-template>

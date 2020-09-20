@@ -1,0 +1,14 @@
+#categories .category{
+  border: 1px solid #000;
+  padding: 15px;
+}
+
+#categories .category i{
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 25px;
+}
+
+#categories .category i:hover{
+  color: #0069d9;
+}

@@ -1,4 +1,4 @@
-<div class="row" id="categories">
+<div class="row" id="categories" *ngIf="showCategories">
   <div class="col-12 mt-4 mb-4">
 
 
@@ -10,8 +10,90 @@
       </div>
     </div>
 
+    <div class="row" *ngIf="listCategories.length === 0">
+      <div class="col-12">
+        <span>{{'label.no.categories' | translate}}</span>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="listCategories.length > 0">
+      <div class="col-12">
+
+        <div class="row m-0"
+             *ngFor="let category of listCategories | paginate: {itemsPerPage: itemsPerPage, currentPage:page}">
+          <div class="col-12 category rounded mb-2">
+            <div class="row">
+              <div class="col-xl-11 col-lg-10 col-9">
+                <span>{{category.name}}</span>
+              </div>
+
+              <div class="col-xl-1 col-lg-2 col-3 text-right">
+                <i class="fa fa-pencil" (click)="openEditDetail(category)"></i>
+                <i class="fa fa-trash" (click)="removeCategory(category)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row" *ngIf="itemsPerPage < listCategories.length">
+      <div class="col-12 text-center">
+        <pagination-controls
+          (pageChange)="page = $event"
+          [previousLabel]="'label.previous' | translate"
+          [nextLabel]="'label.next' | translate"
+        ></pagination-controls>
+      </div>
+    </div>
 
   </div>
 </div>
 
-<app-add-category *ngIf="showDetail" (close)="closeDetail($event)" ></app-add-category>
+<app-add-category
+  [listCategories]="listCategories"
+  *ngIf="showDetail"
+  (close)="closeDetail($event)"
+  [categoryEdit]="categorySelected"></app-add-category>
+
+
+<app-spinner [hideSpinner]="showCategories"></app-spinner>
+
+
+<ng-template #modal_confirm_delete let-modal>
+
+  <!-- Modal -->
+  <div class="modal-header">
+    <h5 class="modal-title">{{'label.confirm' | translate}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close('no')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{'label.confirm.delete.category' | translate}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary"
+            (click)="modal.close('yes')">{{'label.yes' | translate}}</button>
+    <button type="button" class="btn btn-outline-primary"
+            (click)="modal.close('no')">{{'label.no' | translate}}</button>
+  </div>
+
+</ng-template>
+
+<ng-template #modal_success_delete let-modal>
+
+  <!-- Modal -->
+  <div class="modal-header">
+    <h5 class="modal-title">{{'label.success' | translate}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{'label.delete.category.success' | translate}}
+  </div>
+
+</ng-template>
