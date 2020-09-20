@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public typeRegister: string;
+  public showDetail: boolean;
+
+  constructor() {
+    this.showDetail = false;
+    this.typeRegister = '';
+  }
 
   ngOnInit() {
   }
 
+  openDetail(type: string) {
+    this.showDetail = true;
+    this.typeRegister = type;
+  }
+
+  closeDetail($event) {
+    this.showDetail = $event;
+  }
 }

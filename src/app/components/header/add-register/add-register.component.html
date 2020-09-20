@@ -1,0 +1,63 @@
+<app-detail (close)="closeDetail($event)" *ngIf="loadCategories">
+
+  <h1
+    detail-title>{{(typeRegister === 'deposit') ? ('label.add.deposit' | translate) : ('label.add.expense' | translate)}}</h1>
+
+  <form detail-content [formGroup]="formAddRegister" (ngSubmit)="addRegister()">
+
+    <div class="row form-group">
+      <div class="col-12 mb-2">
+        <label for="description">{{'label.description' | translate}}</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          formControlName="description"
+          class="form-control">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-12 mb-2">
+        <label for="date">{{'label.date' | translate}}</label>
+        <p-calendar
+        inputStyleClass="form-control"
+        name="date"
+        dateFormat="dd/mm/yy"
+        formControlName="date"
+        id="date"
+        [readonlyInput]="true"
+        [locale]="locale"
+        ></p-calendar>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-12">
+        <label for="category">{{'label.category' | translate}}</label>
+        <select name="category" id="category" formControlName="idCategory" class="custom-select">
+          <option [value]="category.id" *ngFor="let category of listCategories">{{category.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-12 mb-2">
+        <label for="quantity">{{'label.quantity' | translate}}</label>
+        <input
+          type="number"
+          name="quantity"
+          id="quantity"
+          formControlName="quantity"
+          class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <button
+          [disabled]="formAddRegister.invalid"
+          type="submit"
+          class="btn btn-primary btn-block mt-4">{{(typeRegister === 'deposit') ? ('label.add.deposit' | translate) : ('label.add.expense' | translate)}}</button>
+      </div>
+    </div>
+
+  </form>
+
+</app-detail>

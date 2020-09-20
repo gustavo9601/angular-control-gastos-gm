@@ -5,3 +5,8 @@ html, body{
 html body{
   background: #dedede;
 }
+
+
+html body .ui-calendar{
+  display: block;
+}

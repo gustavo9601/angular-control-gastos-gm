@@ -26,6 +26,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {AddRegisterComponent} from './components/header/add-register/add-register.component';
+import {CalendarModule} from 'primeng/calendar';
 
 // Firebase
 // import {AngularFireModule} from '@'
@@ -49,13 +51,19 @@ export function configFactory(provider: ConfigService) {
   return () => provider.getData();
 }
 
+export function configDate(provider: ConfigService) {
+  return () => provider.getDateConfig();
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
     TranslatePipe,
     HeaderComponent,
     CategoryComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    AddRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +77,8 @@ export function configFactory(provider: ConfigService) {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CalendarModule
   ],
   providers: [
     TranslateService,
@@ -83,6 +92,13 @@ export function configFactory(provider: ConfigService) {
     {
       provide: APP_INITIALIZER,
       useFactory: configFactory,
+      deps: [ConfigService],
+      multi: true
+    }
+    ,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configDate,
       deps: [ConfigService],
       multi: true
     }

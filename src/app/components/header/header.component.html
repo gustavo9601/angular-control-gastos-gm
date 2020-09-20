@@ -24,10 +24,10 @@
               <li class="nav-item" [routerLink]="['/']" routerLinkActive="$router_link-active$">
                 <a class="nav-link">{{'label.resume' | translate}}</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" (click)="openDetail('deposit')">
                 <a class="nav-link">{{'label.add.deposit' | translate}}</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" (click)="openDetail('expense')">
                 <a class="nav-link">{{'label.add.expense' | translate}}</a>
               </li>
               <li class="nav-item" [routerLink]="['/categories']" routerLinkActive="$router_link-active$">
@@ -48,3 +48,9 @@
 
   </div>
 </div>
+
+<app-add-register
+  *ngIf="showDetail"
+  [typeRegister]="typeRegister"
+  (close)="closeDetail($event)"
+></app-add-register>
