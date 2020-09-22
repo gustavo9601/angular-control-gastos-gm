@@ -49,6 +49,7 @@ export class AddRegisterComponent implements OnInit {
         type: [this.registerSelected.type, Validators.required],
         idCategory: [this.registerSelected.idCategory, Validators.required],
         quantity: [this.registerSelected.quantity, [Validators.required, quantityValid]],
+        user: [this.registerSelected.user, Validators.required]
       });
     } else {
       this.formAddRegister = this.fb.group({

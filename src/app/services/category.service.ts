@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {Category} from '../models/category';
 import {Observable} from 'rxjs';
+import {AuthService} from './auth.service';
 
 
 @Injectable({
@@ -11,7 +12,8 @@ import {Observable} from 'rxjs';
 export class CategoryService {
 
   constructor(
-    private afd: AngularFireDatabase
+    private afd: AngularFireDatabase,
+    private _authService:AuthService
   ) {
 
 
@@ -26,6 +28,7 @@ export class CategoryService {
         const newCategory = categoryRef.push();
 
         category.id = newCategory.key;
+        category.user = this._authService.currentUser();
 
         const categoryRefId = this.afd.database.ref('categories/' + category.id);
 
@@ -46,7 +49,8 @@ export class CategoryService {
   }
 
   getCategories(): Observable<Category[]> {
-    return this.afd.list<Category>('categories').valueChanges();
+    const currentUser = this._authService.currentUser();
+    return this.afd.list<Category>('categories', ref => ref.orderByChild('user').equalTo(currentUser)).valueChanges();
   }
 
   removeCategory(category: Category): Promise<void> {

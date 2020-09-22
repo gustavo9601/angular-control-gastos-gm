@@ -28,11 +28,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {AddRegisterComponent} from './components/header/add-register/add-register.component';
 import {CalendarModule} from 'primeng/calendar';
-import {ResumeComponent} from './componentes/resume/resume.component';
-import {GraphicsComponent} from './componentes/graphics/graphics.component';
+import {ResumeComponent} from './components/resume/resume.component';
+import {GraphicsComponent} from './components/graphics/graphics.component';
 import {ChartModule} from 'primeng/chart';
-import { LoginComponent } from './componentes/login/login.component';
-import { CreateAccountComponent } from './componentes/create-account/create-account.component';
+import { LoginComponent } from './components/login/login.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
 
 // Firebase
 // import {AngularFireModule} from '@'

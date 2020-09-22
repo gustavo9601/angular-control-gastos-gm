@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RegisterService} from '../../services/register.service';
 import {Register} from '../../models/register';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
   public showDetail: boolean;
   public registerSelected: Register;
 
-  constructor(private _registerService: RegisterService) {
+  constructor(private _registerService: RegisterService,
+              private _authService: AuthService) {
     this.showDetail = false;
     this.typeRegister = '';
   }
@@ -41,5 +43,9 @@ export class HeaderComponent implements OnInit {
 
   closeDetail($event) {
     this.showDetail = $event;
+  }
+
+  logOut() {
+    this._authService.logout();
   }
 }

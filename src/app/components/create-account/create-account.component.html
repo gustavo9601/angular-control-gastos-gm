@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-12">
+
+    <div class="row" *ngIf="showCreateUserError">
+      <div class="col-12">
+        <div class="alert alert-danger" role="alert">
+          <strong>{{'label.create.user.error' | translate}}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <form [formGroup]="formCreateAccount" (ngSubmit)="createUser()">
+          <div class="row form-group">
+            <div class="col-12">
+              <label for="email">{{'label.email' | translate}}</label>
+              <input type="email"
+                     name="email"
+                     id="email"
+                     formControlName="email"
+                     class="form-control"
+                     [ngClass]="{'is-valid': email.valid && email.dirty, 'is-invalid': email.invalid && email.dirty}">
+              <div class="valid-feedback">
+                <span>{{'label.correct' | translate}}</span>
+              </div>
+              <div class="invalid-feedback">
+                <span *ngIf="email.errors?.email">{{'label.invalid.email' | translate}}</span>
+                <span *ngIf="email.errors?.required">{{'label.required' | translate}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-12">
+              <label for="password">{{'label.pass' | translate}}</label>
+              <input type="password"
+                     name="password"
+                     id="password"
+                     formControlName="password"
+                     class="form-control"
+                     [ngClass]="{'is-valid': password.valid && password.dirty,
+                     'is-invalid': password.invalid && password.dirty}"
+              >
+              <div class="valid-feedback">
+                <span>{{'label.correct' | translate}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-12">
+              <label for="confirmPassword">{{'label.confirm.pass' | translate}}</label>
+              <input type="password"
+                     name="confirmPassword"
+                     id="confirmPassword"
+                     formControlName="confirmPassword"
+                     class="form-control"
+                     [ngClass]="{'is-valid': confirmPassword.dirty && !formCreateAccount.errors?.confirmPassword,
+                     'is-invalid': confirmPassword.dirty && (confirmPassword.invalid || formCreateAccount.errors?.confirmPassword)}">
+              <div class="valid-feedback">
+                <span>{{'label.correct' | translate}}</span>
+              </div>
+              <div class="invalid-feedback">
+                <span class="d-block" *ngIf="formCreateAccount.errors?.confirmPassword">{{'label.error.confirm' | translate}}</span>
+                <span class="d-block" *ngIf="confirmPassword.errors?.required">{{'label.required' | translate}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-12">
+              <button class="btn btn-block btn-primary"
+                      [disabled]="formCreateAccount.invalid"
+                      type="submit">{{'label.create.user' | translate}}</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <a [routerLink]="['/login']">{{'label.back' | translate}}</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

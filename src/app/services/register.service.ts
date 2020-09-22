@@ -3,6 +3,7 @@ import {Register} from '../models/register';
 import {AngularFireDatabase} from '@angular/fire/database';
 import * as moment from 'moment';
 import {Observable, Subject} from 'rxjs';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class RegisterService {
   public currentRegister: Observable<Register>;
 
   constructor(
-    private afd: AngularFireDatabase
+    private afd: AngularFireDatabase,
+    private _authService:AuthService
   ) {
 
 
@@ -36,8 +38,8 @@ export class RegisterService {
         const newRegister = registerRef.push();
 
         register.id = newRegister.key;
-
         register.date = moment(register.date).format('YYYY-MM-DD');
+        register.user = this._authService.currentUser();
 
         const registerRefId = this.afd.database.ref('registers/' + register.id);
 
@@ -73,7 +75,9 @@ export class RegisterService {
   }
 
   getRegisters(): Observable<Register[]> {
-    return this.afd.list<Register>('registers').valueChanges();
+    const currentUser = this._authService.currentUser();
+    // En la peticion se le indica cual es el correo del usuario que necesitamos que nos traiga la info
+    return this.afd.list<Register>('registers', ref => ref.orderByChild('user').equalTo(currentUser)).valueChanges();
   }
 
   removeCategory(register: Register): Promise<void> {

@@ -1,4 +1,4 @@
-import {AbstractControl} from '@angular/forms';
+import {AbstractControl, FormGroup} from '@angular/forms';
 import {Category} from '../models/category';
 
 
@@ -36,4 +36,19 @@ export function quantityValid(control: AbstractControl) {
   } else {
     return errors;
   }
+}
+
+
+// Como recibe dos parametros del formulario, le enviamos toda la agrupacion
+export function confirmPassword(controls: FormGroup): { [key: string]: any } | null {
+  const password = controls.get('password').value;
+  const confirmPassword = controls.get('confirmPassword').value;
+
+  if (password !== confirmPassword) {
+    return {
+      'confirmPassword': true
+    };
+  }
+
+  return null;
 }
