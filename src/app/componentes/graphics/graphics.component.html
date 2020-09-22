@@ -1,1 +1,33 @@
-<p>graphics works!</p>
+<div class="row" *ngIf="showGraphics">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12 mt-4 mb-4">
+        <div class="row">
+          <div class="col-12">
+            <!--Filtro-->
+            <div class="row">
+              <div class="col-12">
+                <app-filter
+                  [showDateStartEnd]="false"
+                  [showYears]="true"
+                  [listOriginal]="listRegisters"
+                  (filter)="fillData($event)"></app-filter>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <!--Graphic-->
+        <p-chart type="bar" [responsive]="true" [data]="data"></p-chart>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<app-spinner [hideSpinner]="showGraphics"></app-spinner>

@@ -1,6 +1,22 @@
 <form>
+
+
+
   <div class="row form-group">
-    <div class="col-lg-2 col-md-3 col-12">
+    <div class="col-lg-4 col-md-3 col-12" *ngIf="showYears">
+      <label for="category">{{'label.year' | translate}}</label>
+      <select name="year"
+              id="year"
+              [(ngModel)]="filterForm.year"
+              class="custom-select"
+              (change)="filterData()"
+      >
+        <option [value]="year" *ngFor="let year of years">{{year}}</option>
+      </select>
+    </div>
+
+
+    <div class="col-lg-2 col-md-3 col-12 align-self-end" *ngIf="showDateStartEnd">
       <label for="dateStart">{{'label.date.start' | translate}}</label>
       <p-calendar
         showButtonBar="true"
@@ -17,7 +33,7 @@
       </p-calendar>
     </div>
 
-    <div class="col-lg-2 col-md-3 col-12">
+    <div class="col-lg-2 col-md-3 col-12 align-self-end" *ngIf="showDateStartEnd">
       <label for="dateEnd">{{'label.date.end' | translate}}</label>
       <p-calendar
         showButtonBar="true"
@@ -34,7 +50,7 @@
       </p-calendar>
     </div>
 
-    <div class="col-lg-2 col-md-3 col-12">
+    <div class="col-lg-2 col-12 align-self-end" [ngClass]="{'col-md-3': showYears, 'col-md-2': !showYears}" >
       <label for="quantityMin">{{'label.quantity.min' | translate}}</label>
       <input type="text"
              name="quantityMin"
@@ -44,7 +60,7 @@
              class="form-control">
     </div>
 
-    <div class="col-lg-2 col-md-3 col-12">
+    <div class="col-lg-2 col-12 align-self-end" [ngClass]="{'col-md-3': showYears, 'col-md-2': !showYears}" >
       <label for="quantityMax">{{'label.quantity.max' | translate}}</label>
       <input type="text"
              name="quantityMax"
@@ -54,7 +70,7 @@
              class="form-control">
     </div>
 
-    <div class="col-lg-4 col-md-3 col-12">
+    <div class="col-lg-4 col-12 align-self-end" [ngClass]="{'col-md-3': showYears, 'col-md-2': !showYears}">
       <label for="category">{{'label.category' | translate}}</label>
       <select name="category"
               id="category"

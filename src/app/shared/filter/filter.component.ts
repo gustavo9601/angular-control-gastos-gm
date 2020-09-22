@@ -15,14 +15,20 @@ import * as moment from 'moment';
 })
 export class FilterComponent implements OnInit {
 
+  @Input() showYears: boolean;
+  @Input() showDateStartEnd: boolean;
+
   @Input() listOriginal: Register[];
 
   @Output() filter: EventEmitter<Register[]>;
+
 
   public filterForm: IFilter;
   public locale: any;
   public listCategories: Category[];
   public listFiltered: Register[];
+
+  public years: number [];
 
   constructor(
     private _categoryService: CategoryService,
@@ -32,13 +38,14 @@ export class FilterComponent implements OnInit {
     this.filterForm = {
       'dateStart': null,
       'dateEnd': null,
-      'year': null,
+      'year': _.toNumber(moment().format('YYYY')),
       'idCategory': null,
       'quantityMin': null,
       'quantityMax': null
     };
     this.locale = this._configService.locale;
     this.listCategories = [];
+    this.years = [];
   }
 
   ngOnInit() {
@@ -49,6 +56,17 @@ export class FilterComponent implements OnInit {
         console.log('Error al obtener categorias', error);
       }
     );
+
+    if (this.showYears) {
+      this.fillYears();
+    }
+
+  }
+
+  fillYears() {
+    for (let year = this._configService.yearStart; year <= this._configService.yearEnd; year++) {
+      this.years.push(year);
+    }
   }
 
   filterData() {
@@ -118,6 +136,15 @@ export class FilterComponent implements OnInit {
         return register.idCategory === this.filterForm.idCategory;
       });
     }
+
+
+    // Verificacion por años solo si se pasan como tru
+    if (this.showYears && this.filterForm.year){
+      this.listFiltered = _.filter(this.listFiltered, register => {
+        return moment(register.date).year() === _.toNumber(this.filterForm.year);
+      });
+    }
+
 
     this.filter.emit(this.listFiltered);
 
