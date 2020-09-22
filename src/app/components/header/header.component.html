@@ -21,7 +21,7 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto mt-lg-0">
-              <li class="nav-item" [routerLink]="['/']" routerLinkActive="$router_link-active$">
+              <li class="nav-item" [routerLink]="['/resume']" routerLinkActive="$router_link-active$">
                 <a class="nav-link">{{'label.resume' | translate}}</a>
               </li>
               <li class="nav-item" (click)="openDetail('deposit')">
@@ -52,5 +52,6 @@
 <app-add-register
   *ngIf="showDetail"
   [typeRegister]="typeRegister"
+  [registerSelected]="registerSelected"
   (close)="closeDetail($event)"
 ></app-add-register>

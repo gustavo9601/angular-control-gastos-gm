@@ -1,0 +1,126 @@
+<div class="row" id="resume" *ngIf="showResume">
+  <div class="col-12 mt-4 mb-4">
+
+
+    <div class="row">
+      <div class="col-12">
+        <app-filter [listOriginal]="listRegistresOriginal" (filter)="listRegisterFiltered($event)"></app-filter>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="listRegistresFiltered?.length === 0">
+      <div class="col-12">
+        {{'label.no.registries' | translate}}
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-12 total mb-4">
+        <span>{{'label.total' | translate}}
+          <span [ngClass]="{'text-danger' : total< 0, 'text-success' : total > 0}">: COP {{total | currency}}</span>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="row" *ngIf="listRegistresFiltered?.length > 0">
+      <div class="col-12">
+        <div class="row m-0"
+             *ngFor="let register of listRegistresFiltered | paginate:{itemsPerPage: itemsRegistres, currentPage: page}">
+          <div class="col-12 mb-2 register">
+
+            <div class="row">
+              <div class="col-12 date-actions rounded-top border-top border-left border-right">
+
+                <div class="row">
+                  <div class="col-xl-11 col-lg-10 col-9">
+                    <span>{{register.date | date:'dd MMM yyyy'}}</span>
+                  </div>
+                  <div class="col-xl-1 col-lg-2 col-3 text-right">
+                    <i class="fa fa-pencil" (click)="openEditDetail(register)"></i>
+                    <i class="fa fa-trash" (click)="removeRegister(register)"></i>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 rounded-left rounded-right border-bottom border-right border-left">
+                <div class="row">
+                  <div class="col-4 p-3">
+                    <span class="title-field d-block">{{'label.description' | translate}}</span>
+                    <span class="d-block">{{register.description}}</span>
+                  </div>
+                  <div class="col-4 p-3">
+                    <span class="title-field d-block">{{'label.category' | translate}}</span>
+                    <span
+                      class="d-block">{{(register.category) ? register.category.name : ('label.unknown' | translate)}}</span>
+                  </div>
+                  <div class="col-4 p-3">
+                    <span class="title-field d-block">{{'label.quantity' | translate}}</span>
+                    <span class="d-block"expense
+                          [ngClass]="{'text-danger' : register.type === 'expense', 'text-success': register.type === 'deposit'}"
+                    >{{register.quantity}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="itemsRegistres < listRegistresFiltered.length">
+      <div class="col-12 mt-2 text-center">
+        <pagination-controls
+          (pageChange)="page = $event"
+          [previousLabel]="'label.previous' | translate"
+          [nextLabel]="'label.next' | translate"
+        ></pagination-controls>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<ng-template #modal_confirm_delete let-modal>
+
+  <!-- Modal -->
+  <div class="modal-header">
+    <h5 class="modal-title">{{'label.confirm' | translate}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close('no')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{'label.confirm.delete.registry' | translate}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary"
+            (click)="modal.close('yes')">{{'label.yes' | translate}}</button>
+    <button type="button" class="btn btn-outline-primary"
+            (click)="modal.close('no')">{{'label.no' | translate}}</button>
+  </div>
+
+</ng-template>
+
+<ng-template #modal_success_delete let-modal>
+
+  <!-- Modal -->
+  <div class="modal-header">
+    <h5 class="modal-title">{{'label.success' | translate}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{'label.delete.registry.success' | translate}}
+  </div>
+
+</ng-template>
+
+<app-spinner [hideSpinner]="showResume"></app-spinner>

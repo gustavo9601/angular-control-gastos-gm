@@ -28,6 +28,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {AddRegisterComponent} from './components/header/add-register/add-register.component';
 import {CalendarModule} from 'primeng/calendar';
+import { ResumeComponent } from './componentes/resume/resume.component';
+import { GraphicsComponent } from './componentes/graphics/graphics.component';
 
 // Firebase
 // import {AngularFireModule} from '@'
@@ -57,53 +59,57 @@ export function configDate(provider: ConfigService) {
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TranslatePipe,
-    HeaderComponent,
-    CategoryComponent,
-    AddCategoryComponent,
-    AddRegisterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    NgbModule,
-    NgxPaginationModule,
-    CalendarModule
-  ],
-  providers: [
-    TranslateService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [TranslateService],
-      multi: true
-    },
-    ConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: configFactory,
-      deps: [ConfigService],
-      multi: true
-    }
-    ,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: configDate,
-      deps: [ConfigService],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        CategoryComponent,
+        AddCategoryComponent,
+        AddRegisterComponent,
+        ResumeComponent,
+        GraphicsComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
+        NgbModule,
+        NgxPaginationModule,
+        CalendarModule
+    ],
+    providers: [
+        TranslateService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [TranslateService],
+            multi: true
+        },
+        ConfigService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: configFactory,
+            deps: [ConfigService],
+            multi: true
+        }
+        ,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: configDate,
+            deps: [ConfigService],
+            multi: true
+        }
+    ],
+    exports: [
+
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

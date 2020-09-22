@@ -1,0 +1,69 @@
+<form>
+  <div class="row form-group">
+    <div class="col-lg-2 col-md-3 col-12">
+      <label for="dateStart">{{'label.date.start' | translate}}</label>
+      <p-calendar
+        showButtonBar="true"
+        (onTodayClick)="filterData()"
+        (onClearClick)="filterData()"
+        [readonlyInput]="true"
+        dateFormat="dd/mm/yy"
+        inputStyleClass="form-control"
+        name="dateStart"
+        id="dateStart"
+        (onSelect)="filterData()"
+        [(ngModel)]="filterForm.dateStart"
+      >
+      </p-calendar>
+    </div>
+
+    <div class="col-lg-2 col-md-3 col-12">
+      <label for="dateEnd">{{'label.date.end' | translate}}</label>
+      <p-calendar
+        showButtonBar="true"
+        (onTodayClick)="filterData()"
+        (onClearClick)="filterData()"
+        [readonlyInput]="true"
+        dateFormat="dd/mm/yy"
+        inputStyleClass="form-control"
+        name="dateEnd"
+        id="dateEnd"
+        (onSelect)="filterData()"
+        [(ngModel)]="filterForm.dateEnd"
+      >
+      </p-calendar>
+    </div>
+
+    <div class="col-lg-2 col-md-3 col-12">
+      <label for="quantityMin">{{'label.quantity.min' | translate}}</label>
+      <input type="text"
+             name="quantityMin"
+             id="quantityMin"
+             (keyup)="filterData()"
+             [(ngModel)]="filterForm.quantityMin"
+             class="form-control">
+    </div>
+
+    <div class="col-lg-2 col-md-3 col-12">
+      <label for="quantityMax">{{'label.quantity.max' | translate}}</label>
+      <input type="text"
+             name="quantityMax"
+             id="quantityMax"
+             (keyup)="filterData()"
+             [(ngModel)]="filterForm.quantityMax"
+             class="form-control">
+    </div>
+
+    <div class="col-lg-4 col-md-3 col-12">
+      <label for="category">{{'label.category' | translate}}</label>
+      <select name="category"
+              id="category"
+              [(ngModel)]="filterForm.idCategory"
+              class="custom-select"
+              (change)="filterData()"
+      >
+        <option [value]="category.id" *ngFor="let category of listCategories">{{category.name}}</option>
+      </select>
+    </div>
+  </div>
+</form>

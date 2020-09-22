@@ -11,9 +11,29 @@ export function categoryExists(listCategories: Category[]) {
     // De encontrar el valor en la lista, retornara el objeto para que se pusehea al objeto indice de errors
     if (category) {
       return {
-        "existsCategory": true
+        'existsCategory': true
       };
     }
     return null;
   };
+}
+
+export function quantityValid(control: AbstractControl) {
+
+  const errors: any = {};
+
+  if (isNaN(control.value)) {
+    errors.isNotNumber = true;
+  }
+
+  if (control.value === '0' || control.value === 0) {
+    errors.isZero = true;
+  }
+
+  // Si no hay errores retornamos null
+  if (_.isEmpty(errors)) {
+    return null;
+  } else {
+    return errors;
+  }
 }

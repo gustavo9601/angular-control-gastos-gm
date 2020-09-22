@@ -1,0 +1,34 @@
+#resume .date-actions {
+  background: #efefef;
+  padding: 15px;
+}
+
+
+#resume .date-actions i {
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 25px;
+}
+
+#resume .date-actions i:hover {
+  color: #0069d9;
+}
+
+#resume .title-field {
+  color: #ccc;
+}
+
+#resume .rounded-left {
+  border-top-left-radius: 0px !important;
+}
+
+#resume .rounded-right {
+  border-top-right-radius: 0px !important;
+}
+
+#resume .total {
+  text-align: center;
+  border-radius: 4px;
+  font-size: 36px;
+  background: #efefef;
+}

@@ -2,15 +2,29 @@ import {Injectable} from '@angular/core';
 import {Register} from '../models/register';
 import {AngularFireDatabase} from '@angular/fire/database';
 import * as moment from 'moment';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
 
+  private registreSubject: Subject<Register>;
+  public currentRegister: Observable<Register>;
+
   constructor(
     private afd: AngularFireDatabase
   ) {
+
+
+    this.registreSubject = new Subject<Register>();
+    this.currentRegister = this.registreSubject.asObservable();
+
+  }
+
+  // Patron observer, para emitir un mismo valor a todas las subscripciones
+  selectRegister(register: Register) {
+    this.registreSubject.next(register);
   }
 
   addRegister(register: Register) {
@@ -35,4 +49,35 @@ export class RegisterService {
       }
     });
   }
+
+
+  editRegister(register: Register): Promise<boolean> {
+
+    // Devuelvo una promesa
+    return new Promise((resolve, reject) => {
+
+      try {
+        // Formateo la fecha de nuevo
+        register.date = moment(register.date).format('YYYY-MM-DD');
+
+        // Obtengo la referencia del registro con su id y seteo el nuevo valor
+        this.afd.object('/registers/' + register.id).set(register.getData());
+        // Todo bien
+        resolve(true);
+      } catch (error) {
+        // Hubo un error
+        reject('Error al editar el registro');
+      }
+    });
+
+  }
+
+  getRegisters(): Observable<Register[]> {
+    return this.afd.list<Register>('registers').valueChanges();
+  }
+
+  removeCategory(register: Register): Promise<void> {
+    return this.afd.object('/registers/' + register.id).remove();
+  }
+
 }

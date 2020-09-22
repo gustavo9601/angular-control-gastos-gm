@@ -1,6 +1,5 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CategoryService} from '../../services/category.service';
-import {ICategory} from '../../interfaces/icategory';
 import {ConfigService} from '../../services/config.service';
 import {Category} from '../../models/category';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
