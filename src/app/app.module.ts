@@ -31,6 +31,8 @@ import {CalendarModule} from 'primeng/calendar';
 import {ResumeComponent} from './componentes/resume/resume.component';
 import {GraphicsComponent} from './componentes/graphics/graphics.component';
 import {ChartModule} from 'primeng/chart';
+import { LoginComponent } from './componentes/login/login.component';
+import { CreateAccountComponent } from './componentes/create-account/create-account.component';
 
 // Firebase
 // import {AngularFireModule} from '@'
@@ -67,7 +69,9 @@ export function configDate(provider: ConfigService) {
     AddCategoryComponent,
     AddRegisterComponent,
     ResumeComponent,
-    GraphicsComponent
+    GraphicsComponent,
+    LoginComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,
